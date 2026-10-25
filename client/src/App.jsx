@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Navbar from "./components/layout/Navbar";
+
 
 function App() {
 
@@ -16,19 +18,22 @@ const getClinicians = () => {
 };
 
   return (
-    <div className="min-h-screen bg-sky-50 p-8">
-      <h1 className="text-4xl font-bold text-black">EATC Booking System</h1>
-      <p className="mt-4 text-gray-600">My project is working now</p>
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
+    <div>
+        <Navbar />
+        <main id="home">
+          
+        </main>
+    </div> 
+  );
+}
+
+export default App;
+
+{/* <div className="mt-8 grid gap-4 md:grid-cols-2">
         {clinicians.map((clinician) => (
           <div key={clinician.id} className="rounded-xl bg-white p-6 shadow">
             <h2 className="text-xl font-semibold">{clinician.name}</h2>
             <p className="text-gray-600">{clinician.profession}</p>
           </div>
         ))}
-      </div>
-    </div>
-  );
-}
-
-export default App;
+      </div> */}
