@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from "./components/layout/Navbar";
+import Home from "./pages/Home";
 
 
 function App() {
@@ -20,8 +21,9 @@ const getClinicians = () => {
   return (
     <div>
         <Navbar />
+        <Home />
         <main id="home">
-          
+
         </main>
     </div> 
   );
