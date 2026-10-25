@@ -1,30 +1,13 @@
-import React, { useEffect, useState } from 'react';
 import Navbar from "./components/layout/Navbar";
 import Home from "./pages/Home";
-
+import Footer from "./components/layout/Footer";
 
 function App() {
-
-  useEffect(() => {
-    getClinicians();
-  }, []);
-
-const [clinicians, setClinicians] = useState([]);
-
-const getClinicians = () => {
-  fetch("http://localhost:3001/api/clinicians")
-  .then(res => res.json())
-  .then(json => setClinicians(json))
-  .catch(error => console.error("Error:", error));
-};
-
   return (
     <div>
         <Navbar />
         <Home />
-        <main id="home">
-
-        </main>
+        <Footer />
     </div> 
   );
 }
