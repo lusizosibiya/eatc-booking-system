@@ -23,7 +23,6 @@ const serviceDurations = {
   couples: 120,
 };
 
-// GET /api/slots?date=2026-11-12&clinicianId=psych-01&serviceId=initial
 app.get("/api/slots", (req, res) => {
   const { date, clinicianId, serviceId } = req.query;
 
@@ -62,14 +61,13 @@ app.get("/api/slots", (req, res) => {
     });
   }
 
-  // Demo schedule: Monday to Friday.
+  // Schedule: Monday to Friday.
   const dayOfWeek = selectedDay.getUTCDay();
 
   if (dayOfWeek === 0 || dayOfWeek === 6) {
     return res.json({ slots: [] });
   }
 
-  // Fictional clinic hours: 08:00 to 16:00.
   const openingMinutes = 8 * 60;
   const closingMinutes = 16 * 60;
   const interval = 30;
@@ -363,21 +361,19 @@ app.delete("/api/bookings/:id", (req, res) => {
   // Find the booking using its unique ID.
   const booking = bookings.find((item) => item.id === id);
 
-  // Return an error if the booking doesn't exist.
   if (!booking) {
     return res.status(404).json({
       message: "Booking not found.",
     });
   }
 
-  // Only pending or confirmed bookings can be cancelled.
   if (!["pending", "confirmed"].includes(booking.status)) {
     return res.status(409).json({
       message: "This booking cannot be cancelled.",
     });
   }
 
-  // Change the status instead of deleting the record.
+  // This changes the status instead of deleting the record.
   booking.status = "cancelled";
   booking.cancelledAt = new Date().toISOString();
 
@@ -385,6 +381,49 @@ app.delete("/api/bookings/:id", (req, res) => {
     message: "Booking cancelled successfully.",
     bookingId: booking.id,
     status: booking.status,
+  });
+});
+
+app.get("/api/admin/bookings", (req, res) => {
+  return res.status(200).json(bookings);
+});
+
+/*
+  PATCH /api/admin/bookings/:id/status
+
+  Approve or decline a pending booking.
+*/
+
+app.patch("/api/admin/bookings/:id/status", (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  // Find the booking.
+  const booking = bookings.find((item) => item.id === id);
+
+  if (!booking) {
+    return res.status(404).json({
+      message: "Booking not found.",
+    });
+  }
+
+  if (!["confirmed", "declined"].includes(status)) {
+    return res.status(400).json({
+      message: "Status must be confirmed or declined.",
+    });
+  }
+
+  if (booking.status !== "pending") {
+    return res.status(409).json({
+      message: "Only pending bookings can be approved or declined.",
+    });
+  }
+
+  booking.status = status;
+
+  return res.status(200).json({
+    message: `Booking ${status} successfully.`,
+    booking,
   });
 });
 
