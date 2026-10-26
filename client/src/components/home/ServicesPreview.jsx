@@ -1,4 +1,3 @@
-
 import individualIcon from "../../assets/individual.png";
 import coupleIcon from "../../assets/couple.png";
 import familyIcon from "../../assets/family.png";
@@ -37,23 +36,38 @@ const services = [
 
 function ServicesPreview() {
   return (
-    <section id="services" className="w-full bg-white px-5 py-8 sm:px-8 lg:px-10">
+    <section
+      id="services"
+      className="w-full bg-white px-5 py-8 sm:px-8 lg:px-10"
+    >
       <div className="mx-auto max-w-[1600px] rounded-2xl bg-[#F2F9FD] px-6 py-8">
-
         {/* Service cards */}
         <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => (
-            <div key={service.id} className={`flex flex-col items-center justify-center px-5 text-center
-                ${index !== 0 ? "lg:border-l lg:border-gray-200" : ""}`}>
-
+            <div
+              key={service.id}
+              className={`flex flex-col items-center justify-center px-5 text-center
+                ${index !== 0 ? "lg:border-l lg:border-gray-200" : ""}`}
+            >
               {/* Icons */}
-              <div className="mb-4 flex h-[76px] w-[76px] items-center justify-center rounded-full" style={{ backgroundColor: service.bgColor }}>
-                <img src={service.icon} alt="" className="h-10 w-10 object-contain"/>
+              <div
+                className="mb-4 flex h-[76px] w-[76px] items-center justify-center rounded-full"
+                style={{ backgroundColor: service.bgColor }}
+              >
+                <img
+                  src={service.icon}
+                  alt=""
+                  className="h-10 w-10 object-contain"
+                />
               </div>
               {/* Service title */}
-              <h3 className="text-lg font-semibold text-black">{service.title}</h3>
+              <h3 className="text-lg font-semibold text-black">
+                {service.title}
+              </h3>
               {/* Service description */}
-              <p className="mt-1 max-w-[250px] text-base leading-snug text-gray-800">{service.description}</p>
+              <p className="mt-1 max-w-[250px] text-base leading-snug text-gray-800">
+                {service.description}
+              </p>
             </div>
           ))}
         </div>
