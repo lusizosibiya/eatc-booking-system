@@ -19,6 +19,9 @@ function ClinicianSelection({ selectedService, selectedClinician, onSelect }) {
 
   // Get clinicians from our Express backend.
   useEffect(() => {
+
+    const controller = new AbortController();
+
     fetch(`${import.meta.env.VITE_API_URL}/api/clinicians`, {
       signal: controller.signal,
     })
