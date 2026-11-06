@@ -19,7 +19,9 @@ function ClinicianSelection({ selectedService, selectedClinician, onSelect }) {
 
   // Get clinicians from our Express backend.
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/clinicians`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/clinicians`, {
+      signal: controller.signal,
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Unable to load clinicians.");
