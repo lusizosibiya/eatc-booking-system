@@ -4,9 +4,16 @@ import clinicians from "./data/clinicians.js";
 import bookings from "./data/bookings.js";
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://eatc-booking-system.netlify.app",
+    ],
+  }),
+);
 app.use(express.json());
 
 app.get("/", (req, res) => {
